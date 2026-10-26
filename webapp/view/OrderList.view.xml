@@ -1,0 +1,180 @@
+<mvc:View
+  controllerName="sap.fiori.salesorder.controller.OrderList"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:f="sap.f">
+
+  <Page
+    id="orderListPage"
+    title="{i18n>orderListTitle}"
+    showNavButton="true"
+    navButtonPress=".onNavBack">
+
+    <headerContent>
+      <Button
+        id="btnRefreshList"
+        icon="sap-icon://refresh"
+        tooltip="{i18n>btnRefresh}"
+        press=".onRefresh" />
+      <Button
+        id="btnCreateNewOrder"
+        text="{i18n>newOrderTileTitle}"
+        icon="sap-icon://add"
+        type="Emphasized"
+        press=".onNavToCreate" />
+    </headerContent>
+
+    <subHeader>
+      <Toolbar design="Solid">
+        <!-- Live Search Field -->
+        <SearchField
+          id="searchOrderField"
+          width="40%"
+          placeholder="{i18n>searchPlaceholder}"
+          search=".onSearchOrders"
+          liveChange=".onLiveSearch" />
+
+        <!-- Status Filter Select -->
+        <Select
+          id="selectStatusFilter"
+          change=".onStatusFilterChange"
+          selectedKey="ALL">
+          <core:Item key="ALL" text="{i18n>filterStatusAll}" />
+          <core:Item key="O" text="{i18n>filterStatusOpen}" />
+          <core:Item key="C" text="{i18n>filterStatusConfirmed}" />
+          <core:Item key="X" text="{i18n>filterStatusCancelled}" />
+        </Select>
+
+        <ToolbarSpacer />
+
+        <!-- Sort Button -->
+        <Button
+          id="btnSortOrders"
+          icon="sap-icon://sort"
+          tooltip="Sort Orders"
+          press=".onOpenSortDialog" />
+
+        <!-- Export CSV Button -->
+        <Button
+          id="btnExportOrders"
+          icon="sap-icon://excel-attachment"
+          text="{i18n>btnExport}"
+          press=".onExportOrders" />
+      </Toolbar>
+    </subHeader>
+
+    <content>
+      <Table
+        id="tblOrders"
+        items="{orders>/list}"
+        growing="true"
+        growingThreshold="15"
+        growingScrollToLoad="true"
+        noDataText="{i18n>noOrdersFound}"
+        mode="SingleSelectMaster"
+        itemPress=".onOrderRowPress">
+
+        <headerToolbar>
+          <OverflowToolbar>
+            <Title
+              text="All Sales Orders ({= ${orders>/list}.length })"
+              level="H4" />
+            <ToolbarSpacer />
+            <Text
+              text="Database: Custom ZSO_HDR Table"
+              class="text-muted sapUiFontSizeExtraSmall" />
+          </OverflowToolbar>
+        </headerToolbar>
+
+        <columns>
+          <!-- Sales Order ID -->
+          <Column width="150px">
+            <Text text="{i18n>colOrderId}" />
+          </Column>
+
+          <!-- Customer -->
+          <Column minScreenWidth="Tablet" demandPopin="true">
+            <Text text="{i18n>colCustomer}" />
+          </Column>
+
+          <!-- Order Date -->
+          <Column minScreenWidth="Tablet" demandPopin="true" width="130px">
+            <Text text="{i18n>colOrderDate}" />
+          </Column>
+
+          <!-- Status -->
+          <Column width="140px" hAlign="Center">
+            <Text text="{i18n>colStatus}" />
+          </Column>
+
+          <!-- Items Count -->
+          <Column minScreenWidth="Desktop" demandPopin="true" width="100px" hAlign="Center">
+            <Text text="{i18n>colItemCount}" />
+          </Column>
+
+          <!-- Total Amount -->
+          <Column width="160px" hAlign="End">
+            <Text text="{i18n>colTotalAmount}" />
+          </Column>
+
+          <!-- Actions -->
+          <Column width="130px" hAlign="Center">
+            <Text text="{i18n>colActions}" />
+          </Column>
+        </columns>
+
+        <items>
+          <ColumnListItem type="Navigation" press=".onOrderRowPress">
+            <cells>
+              <!-- Order ID with ObjectIdentifier -->
+              <ObjectIdentifier
+                title="{orders>Vbeln}"
+                text="ZSO_HDR" />
+
+              <!-- Customer info -->
+              <VBox>
+                <Text text="{orders>CustomerName}" class="sapUiBold" />
+                <Text text="Cust ID: {orders>Kunnr}" class="text-muted sapUiFontSizeExtraSmall" />
+              </VBox>
+
+              <!-- Order Date -->
+              <Text text="{path: 'orders>Erdat', formatter: '.formatter.formatDate'}" />
+
+              <!-- Status with ObjectStatus semantic colors -->
+              <ObjectStatus
+                text="{path: 'orders>Status', formatter: '.formatter.statusText'}"
+                state="{path: 'orders>Status', formatter: '.formatter.statusState'}"
+                icon="{path: 'orders>Status', formatter: '.formatter.statusIcon'}" />
+
+              <!-- Items count -->
+              <ObjectNumber number="{orders>ItemCount}" unit="Items" />
+
+              <!-- Total Amount -->
+              <Text
+                text="{
+                  parts: [{path: 'orders>TotalAmount'}, {path: 'orders>Currency'}],
+                  formatter: '.formatter.currency'
+                }"
+                class="sapUiBold" />
+
+              <!-- Action buttons -->
+              <HBox justifyContent="Center">
+                <Button
+                  icon="sap-icon://display"
+                  tooltip="View Details"
+                  type="Transparent"
+                  press=".onViewOrder" />
+                <Button
+                  icon="sap-icon://delete"
+                  tooltip="Delete Order"
+                  type="Negative"
+                  press=".onDeleteOrder" />
+              </HBox>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </content>
+  </Page>
+</mvc:View>

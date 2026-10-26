@@ -1,0 +1,45 @@
+<mvc:View
+  controllerName="sap.fiori.salesorder.controller.App"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  displayBlock="true">
+
+  <f:ShellBar
+    title="{i18n>appTitle}"
+    secondTitle="Traditional ABAP &amp; SAP Gateway Architecture"
+    homeIcon="sap-icon://sales-order"
+    showCopilot="false"
+    showSearch="false"
+    showNotifications="false">
+    <f:additionalContent>
+      <Button
+        id="btnNavDashboard"
+        text="{i18n>navDashboard}"
+        icon="sap-icon://bbyd-dashboard"
+        type="Transparent"
+        press=".onNavToDashboard" />
+      <Button
+        id="btnNavOrders"
+        text="{i18n>navOrderList}"
+        icon="sap-icon://sales-order-item"
+        type="Transparent"
+        press=".onNavToOrders" />
+      <Button
+        id="btnNavCreate"
+        text="{i18n>navCreateOrder}"
+        icon="sap-icon://add"
+        type="Emphasized"
+        press=".onNavToCreate" />
+      <Button
+        id="btnResetData"
+        icon="sap-icon://refresh"
+        tooltip="Reset Mock DB Store"
+        type="Transparent"
+        press=".onResetDemoData" />
+    </f:additionalContent>
+  </f:ShellBar>
+
+  <App id="appContainer" class="sapUiContentPadding" />
+
+</mvc:View>

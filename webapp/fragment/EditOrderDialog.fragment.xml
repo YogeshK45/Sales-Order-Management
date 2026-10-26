@@ -1,0 +1,48 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:f="sap.ui.layout.form">
+  <Dialog
+    id="editOrderDialog"
+    title="Edit Sales Order {editOrder>/Vbeln}"
+    contentWidth="600px">
+    <content>
+      <f:SimpleForm
+        editable="true"
+        layout="ResponsiveGridLayout"
+        labelSpanXL="4"
+        labelSpanL="4"
+        labelSpanM="4"
+        labelSpanS="12">
+        <f:content>
+          <Label text="{i18n>lblStatus}" />
+          <Select selectedKey="{editOrder>/Status}">
+            <core:Item key="O" text="{i18n>statusOpen}" />
+            <core:Item key="C" text="{i18n>statusConfirmed}" />
+            <core:Item key="X" text="{i18n>statusCancelled}" />
+          </Select>
+
+          <Label text="{i18n>lblCustomerName}" />
+          <Input value="{editOrder>/CustomerName}" />
+
+          <Label text="{i18n>lblRemarks}" />
+          <TextArea
+            value="{editOrder>/Remarks}"
+            rows="3"
+            maxLength="255" />
+        </f:content>
+      </f:SimpleForm>
+    </content>
+    <beginButton>
+      <Button
+        text="{i18n>btnSave}"
+        type="Emphasized"
+        press=".onSaveEditOrder" />
+    </beginButton>
+    <endButton>
+      <Button
+        text="{i18n>btnCancel}"
+        press=".onCancelEditOrder" />
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

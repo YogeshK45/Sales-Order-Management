@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Sales Order Management System | SAP Fiori</title>
+
+  <!-- OpenUI5 / SAPUI5 Bootstrap with SAP Horizon Theme -->
+  <script
+    id="sap-ui-bootstrap"
+    src="https://sdk.openui5.org/resources/sap-ui-core.js"
+    data-sap-ui-theme="sap_horizon"
+    data-sap-ui-resourceroots='{
+      "sap.fiori.salesorder": "./"
+    }'
+    data-sap-ui-compatVersion="edge"
+    data-sap-ui-async="true"
+    data-sap-ui-onInit="module:sap/ui/core/ComponentSupport"
+    data-sap-ui-preload="async"
+    data-sap-ui-libs="sap.m, sap.ui.core, sap.ui.layout, sap.f"
+    data-sap-ui-xx-bindingSyntax="complex">
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body class="sapUiBody sapUiSizeCompact" id="content">
+  <!-- Application Component Container for Standalone and FLP Launch -->
+  <div
+    data-sap-ui-component
+    data-name="sap.fiori.salesorder"
+    data-id="container"
+    data-settings='{"id" : "salesOrderRoot"}'
+    style="height: 100vh; width: 100vw;">
+  </div>
+</body>
+</html>

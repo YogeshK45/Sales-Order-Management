@@ -1,0 +1,74 @@
+[
+  {
+    "Matnr": "MAT-00101",
+    "Maktx": "Industrial Servo Motor 5.5kW High-Torque",
+    "Meins": "EA",
+    "UnitPrice": 1450.00,
+    "Waers": "EUR",
+    "Matkl": "ELECTRICAL",
+    "StockAvailable": 85
+  },
+  {
+    "Matnr": "MAT-00102",
+    "Maktx": "Precision Planetary Gearbox Ratio 10:1",
+    "Meins": "EA",
+    "UnitPrice": 680.00,
+    "Waers": "EUR",
+    "Matkl": "MECHANICAL",
+    "StockAvailable": 120
+  },
+  {
+    "Matnr": "MAT-00103",
+    "Maktx": "Programmable Logic Controller (PLC) CPU Module",
+    "Meins": "EA",
+    "UnitPrice": 2100.00,
+    "Waers": "EUR",
+    "Matkl": "AUTOMATION",
+    "StockAvailable": 45
+  },
+  {
+    "Matnr": "MAT-00104",
+    "Maktx": "Optical Fiber Sensor 24V DC Diffuse Reflective",
+    "Meins": "PC",
+    "UnitPrice": 125.50,
+    "Waers": "EUR",
+    "Matkl": "SENSORS",
+    "StockAvailable": 320
+  },
+  {
+    "Matnr": "MAT-00105",
+    "Maktx": "Heavy-Duty Hydraulic Cylinder 200mm Stroke",
+    "Meins": "EA",
+    "UnitPrice": 950.00,
+    "Waers": "EUR",
+    "Matkl": "HYDRAULIC",
+    "StockAvailable": 60
+  },
+  {
+    "Matnr": "MAT-00106",
+    "Maktx": "Touchscreen HMI Panel 10.4-inch IP65",
+    "Meins": "EA",
+    "UnitPrice": 1850.00,
+    "Waers": "EUR",
+    "Matkl": "AUTOMATION",
+    "StockAvailable": 35
+  },
+  {
+    "Matnr": "MAT-00107",
+    "Maktx": "High-Pressure Pneumatic Solenoid Valve",
+    "Meins": "PC",
+    "UnitPrice": 240.00,
+    "Waers": "EUR",
+    "Matkl": "PNEUMATIC",
+    "StockAvailable": 190
+  },
+  {
+    "Matnr": "MAT-00108",
+    "Maktx": "Reinforced Polyurethane Timing Belt 25mm",
+    "Meins": "M",
+    "UnitPrice": 48.00,
+    "Waers": "EUR",
+    "Matkl": "TRANSMISSION",
+    "StockAvailable": 500
+  }
+]

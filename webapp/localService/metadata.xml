@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+           xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+           xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="ZSALES_ORDER_SRV" xml:lang="en" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      
+      <!-- Customer Entity -->
+      <EntityType Name="Customer" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Kunnr" />
+        </Key>
+        <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer ID" sap:creatable="false" sap:updatable="false" />
+        <Property Name="Name1" Type="Edm.String" MaxLength="35" sap:label="Customer Name" />
+        <Property Name="City" Type="Edm.String" MaxLength="35" sap:label="City" />
+        <Property Name="Country" Type="Edm.String" MaxLength="3" sap:label="Country" />
+        <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:label="Postal Code" />
+        <Property Name="Telephone" Type="Edm.String" MaxLength="16" sap:label="Telephone" />
+        <Property Name="Email" Type="Edm.String" MaxLength="241" sap:label="Email" />
+        <Property Name="CreditLimit" Type="Edm.Decimal" Precision="15" Scale="2" sap:label="Credit Limit" />
+        <Property Name="PaymentTerms" Type="Edm.String" MaxLength="4" sap:label="Payment Terms" />
+      </EntityType>
+
+      <!-- Material Entity -->
+      <EntityType Name="Material" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Matnr" />
+        </Key>
+        <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Material ID" />
+        <Property Name="Maktx" Type="Edm.String" MaxLength="40" sap:label="Material Description" />
+        <Property Name="Meins" Type="Edm.String" MaxLength="3" sap:label="Unit of Measure" sap:semantics="unit-of-measure" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" Precision="15" Scale="2" sap:label="Unit Price" />
+        <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code" />
+        <Property Name="Matkl" Type="Edm.String" MaxLength="9" sap:label="Material Group" />
+        <Property Name="StockAvailable" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Available Stock" />
+      </EntityType>
+
+      <!-- Sales Order Header Entity (Maps to ZSO_HDR) -->
+      <EntityType Name="SalesOrderHeader" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Vbeln" />
+        </Key>
+        <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Sales Order ID" />
+        <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer ID" />
+        <Property Name="CustomerName" Type="Edm.String" MaxLength="35" sap:label="Customer Name" />
+        <Property Name="Erdat" Type="Edm.DateTime" Precision="7" sap:label="Order Date" />
+        <Property Name="Status" Type="Edm.String" MaxLength="1" sap:label="Status" />
+        <Property Name="StatusText" Type="Edm.String" MaxLength="20" sap:label="Status Description" />
+        <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code" />
+        <Property Name="TotalAmount" Type="Edm.Decimal" Precision="15" Scale="2" sap:label="Total Order Amount" />
+        <Property Name="ItemCount" Type="Edm.Int32" sap:label="Total Items" />
+        <Property Name="Remarks" Type="Edm.String" MaxLength="255" sap:label="Remarks" />
+        <NavigationProperty Name="ToItems" Relationship="ZSALES_ORDER_SRV.Assoc_Header_Item" FromRole="From_Header" ToRole="To_Items" />
+      </EntityType>
+
+      <!-- Sales Order Item Entity (Maps to ZSO_ITEM) -->
+      <EntityType Name="SalesOrderItem" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Vbeln" />
+          <PropertyRef Name="Posnr" />
+        </Key>
+        <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Sales Order ID" />
+        <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Item Number" />
+        <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Material ID" />
+        <Property Name="Maktx" Type="Edm.String" MaxLength="40" sap:label="Description" />
+        <Property Name="Qty" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity" />
+        <Property Name="Meins" Type="Edm.String" MaxLength="3" sap:label="UoM" sap:semantics="unit-of-measure" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" Precision="15" Scale="2" sap:label="Unit Price" />
+        <Property Name="NetAmount" Type="Edm.Decimal" Precision="15" Scale="2" sap:label="Net Amount" />
+        <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code" />
+        <NavigationProperty Name="ToHeader" Relationship="ZSALES_ORDER_SRV.Assoc_Header_Item" FromRole="To_Items" FromRoleB="From_Header" />
+      </EntityType>
+
+      <!-- Association between Header and Items -->
+      <Association Name="Assoc_Header_Item" sap:content-version="1">
+        <End Type="ZSALES_ORDER_SRV.SalesOrderHeader" Multiplicity="1" Role="From_Header" />
+        <End Type="ZSALES_ORDER_SRV.SalesOrderItem" Multiplicity="*" Role="To_Items" />
+        <ReferentialConstraint>
+          <Principal Role="From_Header">
+            <PropertyRef Name="Vbeln" />
+          </Principal>
+          <Dependent Role="To_Items">
+            <PropertyRef Name="Vbeln" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+
+      <!-- Entity Sets in the Container -->
+      <EntityContainer Name="ZSALES_ORDER_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+        <EntitySet Name="CustomerSet" EntityType="ZSALES_ORDER_SRV.Customer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="true" />
+        <EntitySet Name="MaterialSet" EntityType="ZSALES_ORDER_SRV.Material" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="true" />
+        <EntitySet Name="SalesOrderHeaderSet" EntityType="ZSALES_ORDER_SRV.SalesOrderHeader" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:pageable="true" />
+        <EntitySet Name="SalesOrderItemSet" EntityType="ZSALES_ORDER_SRV.SalesOrderItem" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:pageable="true" />
+        
+        <AssociationSet Name="Assoc_Header_ItemSet" Association="ZSALES_ORDER_SRV.Assoc_Header_Item" sap:creatable="true" sap:updatable="false" sap:deletable="false">
+          <End EntitySet="SalesOrderHeaderSet" Role="From_Header" />
+          <End EntitySet="SalesOrderItemSet" Role="To_Items" />
+        </AssociationSet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

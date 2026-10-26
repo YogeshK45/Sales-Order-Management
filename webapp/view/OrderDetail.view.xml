@@ -1,0 +1,249 @@
+<mvc:View
+  controllerName="sap.fiori.salesorder.controller.OrderDetail"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form">
+
+  <Page
+    id="orderDetailPage"
+    title="{i18n>orderDetailTitle} #{orderDetail>/Vbeln}"
+    showNavButton="true"
+    navButtonPress=".onNavBack">
+
+    <!-- Header Actions Toolbar -->
+    <headerContent>
+      <Button
+        id="btnEditOrder"
+        text="{i18n>btnEdit}"
+        icon="sap-icon://edit"
+        type="Transparent"
+        press=".onOpenEditDialog" />
+      <Button
+        id="btnConfirmOrder"
+        text="{i18n>btnConfirm}"
+        icon="sap-icon://accept"
+        type="Accept"
+        visible="{= ${orderDetail>/Status} !== 'C' }"
+        press=".onConfirmOrder" />
+      <Button
+        id="btnCancelOrderAction"
+        text="{i18n>btnCancelOrder}"
+        icon="sap-icon://decline"
+        type="Reject"
+        visible="{= ${orderDetail>/Status} !== 'X' }"
+        press=".onCancelOrder" />
+      <Button
+        id="btnDeleteDetailOrder"
+        icon="sap-icon://delete"
+        tooltip="{i18n>btnDelete}"
+        type="Negative"
+        press=".onDeleteOrder" />
+      <Button
+        id="btnPrintOrder"
+        icon="sap-icon://print"
+        tooltip="Print Order Confirmation"
+        press=".onPrintOrder" />
+    </headerContent>
+
+    <content>
+      <VBox class="sapUiResponsiveMargin">
+
+        <!-- SAP Fiori Object Header -->
+        <ObjectHeader
+          id="orderObjectHeader"
+          title="{orderDetail>/CustomerName}"
+          intro="Sales Order: {orderDetail>/Vbeln}"
+          number="{
+            parts: [{path: 'orderDetail>/TotalAmount'}, {path: 'orderDetail>/Currency'}],
+            formatter: '.formatter.currency'
+          }"
+          numberUnit="{orderDetail>/Currency}"
+          responsive="true"
+          fullScreenOptimized="true">
+          <attributes>
+            <ObjectAttribute
+              title="{i18n>lblCustomer}"
+              text="{orderDetail>/Kunnr}" />
+            <ObjectAttribute
+              title="{i18n>lblOrderDate}"
+              text="{path: 'orderDetail>/Erdat', formatter: '.formatter.formatDate'}" />
+            <ObjectAttribute
+              title="ABAP DB Origin"
+              text="Custom Table ZSO_HDR" />
+          </attributes>
+          <statuses>
+            <ObjectStatus
+              title="{i18n>colStatus}"
+              text="{path: 'orderDetail>/Status', formatter: '.formatter.statusText'}"
+              state="{path: 'orderDetail>/Status', formatter: '.formatter.statusState'}"
+              icon="{path: 'orderDetail>/Status', formatter: '.formatter.statusIcon'}" />
+            <ObjectStatus
+              title="Items"
+              text="{= ${orderDetail>/Items}.length } Line Items"
+              state="Information" />
+          </statuses>
+        </ObjectHeader>
+
+        <!-- Customer & Shipping Information Panel -->
+        <Panel
+          headerText="{i18n>secCustomerDetails}"
+          expandable="true"
+          expanded="true">
+          <content>
+            <f:SimpleForm
+              editable="false"
+              layout="ResponsiveGridLayout"
+              labelSpanXL="3"
+              labelSpanL="3"
+              labelSpanM="4"
+              labelSpanS="12"
+              columnsXL="2"
+              columnsL="2"
+              columnsM="1">
+              <f:content>
+                <core:Title text="Customer Information" />
+                <Label text="Customer ID" />
+                <Text text="{orderDetail>/Customer/Kunnr}" class="sapUiBold" />
+
+                <Label text="Customer Name" />
+                <Text text="{orderDetail>/Customer/Name1}" />
+
+                <Label text="Location" />
+                <Text text="{orderDetail>/Customer/City}, {orderDetail>/Customer/Country} ({orderDetail>/Customer/PostalCode})" />
+
+                <core:Title text="Contact &amp; Commercial Terms" />
+                <Label text="Telephone" />
+                <Text text="{orderDetail>/Customer/Telephone}" />
+
+                <Label text="Email" />
+                <Text text="{orderDetail>/Customer/Email}" />
+
+                <Label text="Payment Terms" />
+                <Text text="{orderDetail>/Customer/PaymentTerms} (Standard SAP Commercial Terms)" />
+              </f:content>
+            </f:SimpleForm>
+          </content>
+        </Panel>
+
+        <!-- Line Items Table (ZSO_ITEM) -->
+        <Panel
+          headerText="{i18n>secOrderItems}"
+          expandable="true"
+          expanded="true">
+          <headerToolbar>
+            <Toolbar>
+              <Title
+                text="{i18n>secOrderItems} ({= ${orderDetail>/Items}.length })"
+                level="H3" />
+              <ToolbarSpacer />
+              <Text
+                text="Database: Custom ZSO_ITEM Table"
+                class="text-muted sapUiFontSizeExtraSmall" />
+            </Toolbar>
+          </headerToolbar>
+          <content>
+            <Table
+              id="tblDetailItems"
+              items="{orderDetail>/Items}"
+              noDataText="{i18n>noItemsInOrder}">
+              <columns>
+                <Column width="90px">
+                  <Text text="{i18n>colItemNo}" />
+                </Column>
+                <Column width="160px">
+                  <Text text="{i18n>colMaterial}" />
+                </Column>
+                <Column minScreenWidth="Tablet" demandPopin="true">
+                  <Text text="{i18n>colMaterialDesc}" />
+                </Column>
+                <Column width="120px" hAlign="End">
+                  <Text text="{i18n>colQuantity}" />
+                </Column>
+                <Column width="70px" hAlign="Center">
+                  <Text text="{i18n>colUoM}" />
+                </Column>
+                <Column width="140px" hAlign="End">
+                  <Text text="{i18n>colUnitPrice}" />
+                </Column>
+                <Column width="160px" hAlign="End">
+                  <Text text="{i18n>colNetAmount}" />
+                </Column>
+              </columns>
+              <items>
+                <ColumnListItem>
+                  <cells>
+                    <Text text="{orderDetail>Posnr}" class="sapUiBold" />
+                    <ObjectIdentifier
+                      title="{orderDetail>Matnr}"
+                      text="MARA/MAKT" />
+                    <Text text="{orderDetail>Maktx}" />
+                    <Text text="{path: 'orderDetail>Qty', formatter: '.formatter.quantity'}" />
+                    <Text text="{orderDetail>Meins}" />
+                    <Text
+                      text="{
+                        parts: [{path: 'orderDetail>UnitPrice'}, {path: 'orderDetail>Waers'}],
+                        formatter: '.formatter.currency'
+                      }" />
+                    <Text
+                      text="{
+                        parts: [{path: 'orderDetail>NetAmount'}, {path: 'orderDetail>Waers'}],
+                        formatter: '.formatter.currency'
+                      }"
+                      class="sapUiBold" />
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </content>
+        </Panel>
+
+        <!-- Order Remarks and Totals -->
+        <l:Grid defaultSpan="XL6 L6 M12 S12">
+          <!-- Remarks Panel -->
+          <Panel headerText="{i18n>lblRemarks}">
+            <content>
+              <Text
+                text="{= ${orderDetail>/Remarks} ? ${orderDetail>/Remarks} : 'No specific remarks or instructions recorded for this sales order.' }"
+                class="sapUiSmallMargin" />
+            </content>
+          </Panel>
+
+          <!-- Order Financial Breakdown -->
+          <VBox class="orderSummaryBox sapUiSmallMargin">
+            <Title text="Financial Breakdown" level="H4" class="sapUiTinyMarginBottom" />
+            <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+              <Text text="Subtotal Net Amount:" />
+              <Text
+                text="{
+                  parts: [{path: 'orderDetail>/TotalAmount'}, {path: 'orderDetail>/Currency'}],
+                  formatter: '.formatter.currency'
+                }"
+                class="sapUiBold" />
+            </HBox>
+            <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+              <Text text="Value-Added Tax (19% VAT):" />
+              <Text
+                text="{
+                  parts: [{path: 'orderDetail>/calculatedTax'}, {path: 'orderDetail>/Currency'}],
+                  formatter: '.formatter.currency'
+                }" />
+            </HBox>
+            <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginTop">
+              <Title text="Grand Total (Gross):" level="H3" />
+              <Title
+                text="{
+                  parts: [{path: 'orderDetail>/calculatedGrandTotal'}, {path: 'orderDetail>/Currency'}],
+                  formatter: '.formatter.currency'
+                }"
+                level="H2"
+                class="grandTotalHighlight" />
+            </HBox>
+          </VBox>
+        </l:Grid>
+
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

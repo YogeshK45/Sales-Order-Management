@@ -1,0 +1,129 @@
+/* Custom Enterprise Styling complementing SAP Horizon Theme */
+
+/* Header / FLP Shell simulation */
+.fioriCustomShellHeader {
+  background: linear-gradient(135deg, #1d2d3e 0%, #0d1b2a 100%) !important;
+  color: #ffffff !important;
+  border-bottom: 2px solid #0070f2 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.fioriAppTitle {
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+  color: #ffffff !important;
+  letter-spacing: 0.5px;
+}
+
+/* KPI Card & Tile Enhancements */
+.kpiCardContainer {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 8px !important;
+  overflow: hidden;
+  border: 1px solid rgba(0, 112, 242, 0.12) !important;
+}
+
+.kpiCardContainer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 112, 242, 0.12) !important;
+}
+
+.kpiCardTotal {
+  border-top: 4px solid #0070f2 !important;
+}
+
+.kpiCardOpen {
+  border-top: 4px solid #e76500 !important;
+}
+
+.kpiCardConfirmed {
+  border-top: 4px solid #107e3e !important;
+}
+
+.kpiCardCancelled {
+  border-top: 4px solid #bb0000 !important;
+}
+
+.kpiCardValue {
+  border-top: 4px solid #632d84 !important;
+}
+
+/* Dashboard Metric Numbers */
+.kpiMetricNumber {
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2;
+}
+
+.kpiMetricLabel {
+  font-size: 0.85rem !important;
+  color: #6a6d70;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: 600;
+}
+
+/* SAP Table Polish */
+.sapMListTblRow:hover {
+  background-color: #f5f9ff !important;
+  cursor: pointer;
+}
+
+/* Summary Box on Create Order */
+.orderSummaryBox {
+  background: #f7f9fa;
+  border: 1px solid #d9dcdf;
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.grandTotalHighlight {
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  color: #0070f2 !important;
+}
+
+/* Status Badges */
+.statusBadgeOpen {
+  background-color: #fff4e5;
+  color: #a34800;
+  border: 1px solid #ffcc80;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+.statusBadgeConfirmed {
+  background-color: #eaf6ee;
+  color: #0d6030;
+  border: 1px solid #a1d9b3;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+.statusBadgeCancelled {
+  background-color: #fcedeb;
+  color: #940a0a;
+  border: 1px solid #f6b5b1;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+/* Micro animations */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sapMNav {
+  animation: fadeInSlide 0.25s ease-out;
+}

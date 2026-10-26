@@ -1,0 +1,74 @@
+[
+  {
+    "Vbeln": "0000001001",
+    "Kunnr": "10000001",
+    "CustomerName": "Acme Industrial Technologies Ltd",
+    "Erdat": "2026-10-15",
+    "Status": "C",
+    "StatusText": "Confirmed",
+    "Currency": "EUR",
+    "TotalAmount": 8450.00,
+    "ItemCount": 3,
+    "Remarks": "Urgent plant maintenance requirement. Delivery via express freight."
+  },
+  {
+    "Vbeln": "0000001002",
+    "Kunnr": "10000002",
+    "CustomerName": "Starlight Global Logistics Inc",
+    "Erdat": "2026-10-18",
+    "Status": "O",
+    "StatusText": "Open",
+    "Currency": "EUR",
+    "TotalAmount": 12850.00,
+    "ItemCount": 4,
+    "Remarks": "Standard quarterly restock for regional distribution hub."
+  },
+  {
+    "Vbeln": "0000001003",
+    "Kunnr": "10000003",
+    "CustomerName": "Apex Advanced Manufacturing Corp",
+    "Erdat": "2026-10-21",
+    "Status": "O",
+    "StatusText": "Open",
+    "Currency": "EUR",
+    "TotalAmount": 26400.00,
+    "ItemCount": 2,
+    "Remarks": "New production line automation project phase 1."
+  },
+  {
+    "Vbeln": "0000001004",
+    "Kunnr": "10000004",
+    "CustomerName": "Zenith Pharma & Biotech Solutions",
+    "Erdat": "2026-10-22",
+    "Status": "C",
+    "StatusText": "Confirmed",
+    "Currency": "EUR",
+    "TotalAmount": 9780.00,
+    "ItemCount": 3,
+    "Remarks": "Cleanroom compliant automation components."
+  },
+  {
+    "Vbeln": "0000001005",
+    "Kunnr": "10000005",
+    "CustomerName": "Nordic Clean Energy Systems AB",
+    "Erdat": "2026-10-24",
+    "Status": "X",
+    "StatusText": "Cancelled",
+    "Currency": "EUR",
+    "TotalAmount": 4200.00,
+    "ItemCount": 2,
+    "Remarks": "Project scope changed by client; order cancelled and will re-issue."
+  },
+  {
+    "Vbeln": "0000001006",
+    "Kunnr": "10000006",
+    "CustomerName": "Vortex Heavy Engineering LLC",
+    "Erdat": "2026-10-25",
+    "Status": "O",
+    "StatusText": "Open",
+    "Currency": "EUR",
+    "TotalAmount": 19200.00,
+    "ItemCount": 3,
+    "Remarks": "Hydraulic retrofit package for stamping press."
+  }
+]

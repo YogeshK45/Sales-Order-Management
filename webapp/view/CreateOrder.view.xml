@@ -1,0 +1,287 @@
+<mvc:View
+  controllerName="sap.fiori.salesorder.controller.CreateOrder"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form">
+
+  <Page
+    id="createOrderPage"
+    title="{i18n>createOrderTitle}"
+    showNavButton="true"
+    navButtonPress=".onCancel">
+
+    <content>
+      <VBox class="sapUiResponsiveMargin">
+
+        <!-- 1. Header Information Section -->
+        <Panel
+          headerText="{i18n>secHeaderInfo}"
+          expandable="true"
+          expanded="true">
+          <content>
+            <f:SimpleForm
+              id="headerForm"
+              editable="true"
+              layout="ResponsiveGridLayout"
+              labelSpanXL="3"
+              labelSpanL="3"
+              labelSpanM="4"
+              labelSpanS="12"
+              adjustLabelSpan="false"
+              emptySpanXL="1"
+              emptySpanL="1"
+              emptySpanM="0"
+              emptySpanS="0"
+              columnsXL="2"
+              columnsL="2"
+              columnsM="1"
+              singleContainerFullSize="false">
+              <f:content>
+                <!-- Sales Order ID -->
+                <Label text="{i18n>lblOrderId}" />
+                <Input
+                  id="inputVbeln"
+                  value="{createOrder>/header/Vbeln}"
+                  placeholder="{i18n>lblOrderIdHint}"
+                  maxLength="10"
+                  liveChange=".onVbelnLiveChange" />
+
+                <!-- Customer Selection -->
+                <Label text="{i18n>lblCustomer}" required="true" />
+                <Input
+                  id="inputKunnr"
+                  value="{createOrder>/header/Kunnr}"
+                  placeholder="Select customer via Value Help"
+                  showValueHelp="true"
+                  valueHelpRequest=".onCustomerValueHelpRequest"
+                  change=".onKunnrChange"
+                  valueState="{createOrder>/validation/kunnrState}"
+                  valueStateText="{createOrder>/validation/kunnrStateText}" />
+
+                <Label text="{i18n>lblCustomerName}" />
+                <Input
+                  id="inputCustomerName"
+                  value="{createOrder>/header/CustomerName}"
+                  editable="false" />
+
+                <!-- Order Date -->
+                <core:Title text="Order Attributes &amp; Status" />
+
+                <Label text="{i18n>lblOrderDate}" required="true" />
+                <DatePicker
+                  id="dpOrderDate"
+                  value="{createOrder>/header/Erdat}"
+                  valueFormat="yyyy-MM-dd"
+                  displayFormat="dd-MMM-yyyy"
+                  change=".onDateChange"
+                  valueState="{createOrder>/validation/dateState}" />
+
+                <!-- Initial Status -->
+                <Label text="{i18n>lblStatus}" />
+                <Select
+                  id="selectStatus"
+                  selectedKey="{createOrder>/header/Status}">
+                  <core:Item key="O" text="{i18n>statusOpen}" />
+                  <core:Item key="C" text="{i18n>statusConfirmed}" />
+                </Select>
+
+                <!-- Remarks -->
+                <Label text="{i18n>lblRemarks}" />
+                <TextArea
+                  id="taRemarks"
+                  value="{createOrder>/header/Remarks}"
+                  rows="2"
+                  maxLength="255"
+                  placeholder="Add internal shipping notes or order instructions..." />
+              </f:content>
+            </f:SimpleForm>
+          </content>
+        </Panel>
+
+        <!-- 2. Dynamic Line Items Section -->
+        <Panel
+          headerText="{i18n>secLineItems}"
+          expandable="true"
+          expanded="true">
+          <headerToolbar>
+            <Toolbar>
+              <Title
+                text="{i18n>secLineItems} ({= ${createOrder>/items}.length })"
+                level="H3" />
+              <ToolbarSpacer />
+              <Button
+                id="btnAddLineItem"
+                text="{i18n>btnAddItem}"
+                icon="sap-icon://add"
+                type="Emphasized"
+                press=".onAddItem" />
+            </Toolbar>
+          </headerToolbar>
+
+          <content>
+            <Table
+              id="tblCreateItems"
+              items="{createOrder>/items}"
+              noDataText="{i18n>noItemsInOrder}">
+              <columns>
+                <Column width="90px">
+                  <Text text="{i18n>colItemNo}" />
+                </Column>
+                <Column width="180px">
+                  <Text text="{i18n>colMaterial}" />
+                </Column>
+                <Column minScreenWidth="Tablet" demandPopin="true">
+                  <Text text="{i18n>colMaterialDesc}" />
+                </Column>
+                <Column width="120px" hAlign="End">
+                  <Text text="{i18n>colQuantity}" />
+                </Column>
+                <Column width="70px" hAlign="Center">
+                  <Text text="{i18n>colUoM}" />
+                </Column>
+                <Column width="130px" hAlign="End">
+                  <Text text="{i18n>colUnitPrice}" />
+                </Column>
+                <Column width="150px" hAlign="End">
+                  <Text text="{i18n>colNetAmount}" />
+                </Column>
+                <Column width="70px" hAlign="Center">
+                  <Text text="{i18n>colItemAction}" />
+                </Column>
+              </columns>
+
+              <items>
+                <ColumnListItem>
+                  <cells>
+                    <!-- Item number POSNR -->
+                    <Input
+                      value="{createOrder>Posnr}"
+                      width="100%"
+                      maxLength="6"
+                      change=".onPosnrChange" />
+
+                    <!-- Material ID with Value Help -->
+                    <Input
+                      value="{createOrder>Matnr}"
+                      showValueHelp="true"
+                      valueHelpRequest=".onMaterialValueHelpRequest"
+                      placeholder="Select Material"
+                      change=".onMatnrChange" />
+
+                    <!-- Description -->
+                    <Input
+                      value="{createOrder>Maktx}"
+                      placeholder="Description" />
+
+                    <!-- Quantity -->
+                    <Input
+                      value="{createOrder>Qty}"
+                      type="Number"
+                      textAlign="End"
+                      liveChange=".onRecalculateAmounts"
+                      change=".onRecalculateAmounts" />
+
+                    <!-- Unit of Measure -->
+                    <Text text="{createOrder>Meins}" />
+
+                    <!-- Unit Price -->
+                    <Input
+                      value="{createOrder>UnitPrice}"
+                      type="Number"
+                      textAlign="End"
+                      liveChange=".onRecalculateAmounts"
+                      change=".onRecalculateAmounts" />
+
+                    <!-- Net Amount Calculated Automatically -->
+                    <ObjectNumber
+                      number="{
+                        parts: [{path: 'createOrder>NetAmount'}, {path: 'createOrder>/header/Currency'}],
+                        formatter: '.formatter.currency'
+                      }"
+                      state="Information" />
+
+                    <!-- Delete item row button -->
+                    <Button
+                      icon="sap-icon://delete"
+                      type="Transparent"
+                      press=".onRemoveItem"
+                      tooltip="{i18n>btnRemoveItem}" />
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </content>
+        </Panel>
+
+        <!-- 3. Real-Time Order Totals & Financial Breakdown -->
+        <l:Grid defaultSpan="XL6 L6 M12 S12">
+          <!-- Information Card -->
+          <VBox class="sapUiSmallMargin">
+            <MessageStrip
+              text="Amounts calculate in real-time. Net Amount = Quantity × Unit Price. When saved, order data is transactionally inserted into custom tables ZSO_HDR and ZSO_ITEM via deep entity persistence."
+              type="Information"
+              showIcon="true" />
+          </VBox>
+
+          <!-- Order Summary Card -->
+          <VBox class="orderSummaryBox sapUiSmallMargin">
+            <Title text="{i18n>secSummary}" level="H4" class="sapUiTinyMarginBottom" />
+            <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+              <Text text="{i18n>colItemCount}:" />
+              <Text text="{= ${createOrder>/items}.length } Line Items" class="sapUiBold" />
+            </HBox>
+            <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+              <Text text="{i18n>lblSubtotal}:" />
+              <Text
+                text="{
+                  parts: [{path: 'createOrder>/calculated/subtotal'}, {path: 'createOrder>/header/Currency'}],
+                  formatter: '.formatter.currency'
+                }"
+                class="sapUiBold" />
+            </HBox>
+            <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+              <Text text="{i18n>lblTax}:" />
+              <Text
+                text="{
+                  parts: [{path: 'createOrder>/calculated/tax'}, {path: 'createOrder>/header/Currency'}],
+                  formatter: '.formatter.currency'
+                }" />
+            </HBox>
+            <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginTop">
+              <Title text="{i18n>lblGrandTotal}:" level="H3" />
+              <Title
+                text="{
+                  parts: [{path: 'createOrder>/calculated/grandTotal'}, {path: 'createOrder>/header/Currency'}],
+                  formatter: '.formatter.currency'
+                }"
+                level="H2"
+                class="grandTotalHighlight" />
+            </HBox>
+          </VBox>
+        </l:Grid>
+
+      </VBox>
+    </content>
+
+    <!-- Footer Bar with Save and Cancel -->
+    <footer>
+      <OverflowToolbar>
+        <ToolbarSpacer />
+        <Button
+          id="btnSaveOrder"
+          text="{i18n>btnSave}"
+          type="Emphasized"
+          icon="sap-icon://save"
+          press=".onSaveOrder" />
+        <Button
+          id="btnCancelOrder"
+          text="{i18n>btnCancel}"
+          type="Transparent"
+          press=".onCancel" />
+      </OverflowToolbar>
+    </footer>
+
+  </Page>
+</mvc:View>

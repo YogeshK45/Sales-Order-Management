@@ -1,0 +1,42 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <TableSelectDialog
+    id="customerValueHelpDialog"
+    title="{i18n>customerVHTitle}"
+    search=".onCustomerValueHelpSearch"
+    confirm=".onCustomerValueHelpConfirm"
+    cancel=".onCustomerValueHelpCancel"
+    items="{customerVH>/list}">
+    <columns>
+      <Column width="130px">
+        <Text text="{i18n>lblCustomer}" />
+      </Column>
+      <Column>
+        <Text text="{i18n>lblCustomerName}" />
+      </Column>
+      <Column minScreenWidth="Tablet" demandPopin="true" width="130px">
+        <Text text="{i18n>colCustomerCity}" />
+      </Column>
+      <Column minScreenWidth="Tablet" demandPopin="true" width="80px">
+        <Text text="{i18n>colCustomerCountry}" />
+      </Column>
+      <Column minScreenWidth="Desktop" demandPopin="true" width="150px">
+        <Text text="{i18n>colCustomerPhone}" />
+      </Column>
+    </columns>
+    <items>
+      <ColumnListItem type="Active">
+        <cells>
+          <ObjectIdentifier
+            title="{customerVH>Kunnr}"
+            text="Customer" />
+          <Text text="{customerVH>Name1}" class="sapUiBold" />
+          <Text text="{customerVH>City}" />
+          <Text text="{customerVH>Country}" />
+          <Text text="{customerVH>Telephone}" />
+        </cells>
+      </ColumnListItem>
+    </items>
+  </TableSelectDialog>
+</core:FragmentDefinition>

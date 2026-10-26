@@ -1,0 +1,50 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <TableSelectDialog
+    id="materialValueHelpDialog"
+    title="{i18n>materialVHTitle}"
+    search=".onMaterialValueHelpSearch"
+    confirm=".onMaterialValueHelpConfirm"
+    cancel=".onMaterialValueHelpCancel"
+    items="{materialVH>/list}">
+    <columns>
+      <Column width="140px">
+        <Text text="{i18n>colMaterial}" />
+      </Column>
+      <Column>
+        <Text text="{i18n>colMaterialDesc}" />
+      </Column>
+      <Column width="80px" hAlign="Center">
+        <Text text="{i18n>colUoM}" />
+      </Column>
+      <Column width="130px" hAlign="End">
+        <Text text="{i18n>colUnitPrice}" />
+      </Column>
+      <Column minScreenWidth="Tablet" demandPopin="true" width="110px" hAlign="End">
+        <Text text="{i18n>colMatAvailable}" />
+      </Column>
+    </columns>
+    <items>
+      <ColumnListItem type="Active">
+        <cells>
+          <ObjectIdentifier
+            title="{materialVH>Matnr}"
+            text="{materialVH>Matkl}" />
+          <Text text="{materialVH>Maktx}" class="sapUiBold" />
+          <Text text="{materialVH>Meins}" />
+          <Text
+            text="{
+              parts: [{path: 'materialVH>UnitPrice'}, {path: 'materialVH>Waers'}],
+              formatter: '.formatter.currency'
+            }"
+            class="sapUiBold" />
+          <ObjectNumber
+            number="{materialVH>StockAvailable}"
+            unit="{materialVH>Meins}"
+            state="{= ${materialVH>StockAvailable} > 20 ? 'Success' : 'Warning'}" />
+        </cells>
+      </ColumnListItem>
+    </items>
+  </TableSelectDialog>
+</core:FragmentDefinition>

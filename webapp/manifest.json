@@ -1,0 +1,122 @@
+{
+  "_version": "1.32.0",
+  "sap.app": {
+    "id": "sap.fiori.salesorder",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "dataSources": {
+      "salesOrderService": {
+        "uri": "/sap/opu/odata/sap/ZSALES_ORDER_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://sales-order",
+      "favIcon": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "sap.fiori.salesorder.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.108.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": false
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sap.fiori.salesorder.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "sap.fiori.salesorder.view",
+        "controlId": "appContainer",
+        "controlAggregation": "pages",
+        "transition": "slide",
+        "async": true
+      },
+      "routes": [
+        {
+          "name": "dashboard",
+          "pattern": "",
+          "target": "dashboard"
+        },
+        {
+          "name": "orderList",
+          "pattern": "orders",
+          "target": "orderList"
+        },
+        {
+          "name": "orderDetail",
+          "pattern": "orders/{vbeln}",
+          "target": "orderDetail"
+        },
+        {
+          "name": "createOrder",
+          "pattern": "create",
+          "target": "createOrder"
+        }
+      ],
+      "targets": {
+        "dashboard": {
+          "viewName": "Dashboard",
+          "viewLevel": 1
+        },
+        "orderList": {
+          "viewName": "OrderList",
+          "viewLevel": 2
+        },
+        "orderDetail": {
+          "viewName": "OrderDetail",
+          "viewLevel": 3
+        },
+        "createOrder": {
+          "viewName": "CreateOrder",
+          "viewLevel": 2
+        }
+      }
+    }
+  }
+}

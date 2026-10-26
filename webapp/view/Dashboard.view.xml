@@ -1,0 +1,208 @@
+<mvc:View
+  controllerName="sap.fiori.salesorder.controller.Dashboard"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.f">
+
+  <Page
+    id="dashboardPage"
+    title="{i18n>dashboardTitle}"
+    showNavButton="false"
+    enableScrolling="true">
+
+    <headerContent>
+      <Button
+        id="btnRefreshDashboard"
+        icon="sap-icon://refresh"
+        tooltip="{i18n>btnRefresh}"
+        press=".onRefresh" />
+      <Button
+        id="btnQuickCreateTop"
+        text="{i18n>newOrderTileTitle}"
+        icon="sap-icon://add"
+        type="Emphasized"
+        press=".onNavToCreate" />
+    </headerContent>
+
+    <content>
+      <VBox class="sapUiResponsiveMargin">
+
+        <!-- KPI Metrics Grid -->
+        <l:Grid
+          defaultSpan="XL2 L4 M6 S12"
+          position="Center"
+          class="sapUiSmallMarginBottom">
+
+          <!-- 1. Total Orders KPI Card -->
+          <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom sapThemeHighlight-asBackgroundColor kpiCardContainer kpiCardTotal sapUiContentPadding">
+            <HBox justifyContent="SpaceBetween" alignItems="Center">
+              <Text text="{i18n>kpiTotalOrders}" class="kpiMetricLabel" />
+              <core:Icon src="sap-icon://sales-order" size="1.4rem" color="#0070f2" />
+            </HBox>
+            <Title
+              text="{dashboard>/totalOrders}"
+              level="H1"
+              class="kpiMetricNumber sapUiTinyMarginTop" />
+            <Text text="All recorded sales orders" class="sapUiTinyMarginTop text-muted" />
+          </VBox>
+
+          <!-- 2. Open Orders KPI Card -->
+          <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom kpiCardContainer kpiCardOpen sapUiContentPadding">
+            <HBox justifyContent="SpaceBetween" alignItems="Center">
+              <Text text="{i18n>kpiOpenOrders}" class="kpiMetricLabel" />
+              <core:Icon src="sap-icon://pending" size="1.4rem" color="#e76500" />
+            </HBox>
+            <Title
+              text="{dashboard>/openOrders}"
+              level="H1"
+              class="kpiMetricNumber sapUiTinyMarginTop" />
+            <Text text="Pending review and fulfillment" class="sapUiTinyMarginTop text-muted" />
+          </VBox>
+
+          <!-- 3. Confirmed Orders KPI Card -->
+          <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom kpiCardContainer kpiCardConfirmed sapUiContentPadding">
+            <HBox justifyContent="SpaceBetween" alignItems="Center">
+              <Text text="{i18n>kpiConfirmedOrders}" class="kpiMetricLabel" />
+              <core:Icon src="sap-icon://sys-enter-2" size="1.4rem" color="#107e3e" />
+            </HBox>
+            <Title
+              text="{dashboard>/confirmedOrders}"
+              level="H1"
+              class="kpiMetricNumber sapUiTinyMarginTop" />
+            <Text text="Approved for warehouse dispatch" class="sapUiTinyMarginTop text-muted" />
+          </VBox>
+
+          <!-- 4. Cancelled Orders KPI Card -->
+          <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom kpiCardContainer kpiCardCancelled sapUiContentPadding">
+            <HBox justifyContent="SpaceBetween" alignItems="Center">
+              <Text text="{i18n>kpiCancelledOrders}" class="kpiMetricLabel" />
+              <core:Icon src="sap-icon://sys-cancel" size="1.4rem" color="#bb0000" />
+            </HBox>
+            <Title
+              text="{dashboard>/cancelledOrders}"
+              level="H1"
+              class="kpiMetricNumber sapUiTinyMarginTop" />
+            <Text text="Voided or rejected orders" class="sapUiTinyMarginTop text-muted" />
+          </VBox>
+
+          <!-- 5. Total Order Value KPI Card -->
+          <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom kpiCardContainer kpiCardValue sapUiContentPadding">
+            <HBox justifyContent="SpaceBetween" alignItems="Center">
+              <Text text="{i18n>kpiTotalValue}" class="kpiMetricLabel" />
+              <core:Icon src="sap-icon://money-bills" size="1.4rem" color="#632d84" />
+            </HBox>
+            <Title
+              text="{
+                parts: [{path: 'dashboard>/totalValue'}, {path: 'dashboard>/currency'}],
+                formatter: '.formatter.currency'
+              }"
+              level="H2"
+              class="kpiMetricNumber sapUiTinyMarginTop" />
+            <Text text="Gross revenue pipeline" class="sapUiTinyMarginTop text-muted" />
+          </VBox>
+
+        </l:Grid>
+
+        <!-- Quick Launch Actions & Architecture Banner -->
+        <MessageStrip
+          text="System Status: Traditional ABAP Architecture active. Tables ZSO_HDR &amp; ZSO_ITEM connected via Gateway OData V2 Service Layer."
+          type="Information"
+          showIcon="true"
+          class="sapUiSmallMarginBottom" />
+
+        <!-- Recent Orders Panel with Interactive Table -->
+        <Panel
+          headerText="{i18n>recentOrdersTitle}"
+          expandable="true"
+          expanded="true"
+          class="sapUiResponsiveMargin">
+          <headerToolbar>
+            <Toolbar>
+              <Title text="{i18n>recentOrdersTitle}" level="H3" />
+              <ToolbarSpacer />
+              <Button
+                id="btnViewAllFromDashboard"
+                text="{i18n>viewAllOrders}"
+                icon="sap-icon://navigation-right-arrow"
+                type="Ghost"
+                press=".onNavToOrders" />
+              <Button
+                id="btnCreateFromDashboard"
+                text="{i18n>newOrderTileTitle}"
+                icon="sap-icon://add"
+                type="Emphasized"
+                press=".onNavToCreate" />
+            </Toolbar>
+          </headerToolbar>
+          <content>
+            <Table
+              id="tblRecentOrders"
+              items="{dashboard>/recentOrders}"
+              growing="true"
+              growingThreshold="10"
+              mode="None"
+              itemPress=".onOrderPress"
+              noDataText="{i18n>noOrdersFound}">
+              <columns>
+                <Column width="140px">
+                  <Text text="{i18n>colOrderId}" />
+                </Column>
+                <Column minScreenWidth="Tablet" demandPopin="true">
+                  <Text text="{i18n>colCustomer}" />
+                </Column>
+                <Column minScreenWidth="Tablet" demandPopin="true" width="130px">
+                  <Text text="{i18n>colOrderDate}" />
+                </Column>
+                <Column width="130px" hAlign="Center">
+                  <Text text="{i18n>colStatus}" />
+                </Column>
+                <Column minScreenWidth="Desktop" demandPopin="true" width="90px" hAlign="Center">
+                  <Text text="{i18n>colItemCount}" />
+                </Column>
+                <Column width="160px" hAlign="End">
+                  <Text text="{i18n>colTotalAmount}" />
+                </Column>
+                <Column width="90px" hAlign="Center">
+                  <Text text="{i18n>colActions}" />
+                </Column>
+              </columns>
+              <items>
+                <ColumnListItem type="Navigation" press=".onOrderPress">
+                  <cells>
+                    <ObjectIdentifier
+                      title="{dashboard>Vbeln}"
+                      text="ZSO_HDR" />
+                    <VBox>
+                      <Text text="{dashboard>CustomerName}" class="sapUiTinyMarginBottom" />
+                      <Text text="Cust ID: {dashboard>Kunnr}" class="text-muted sapUiFontSizeExtraSmall" />
+                    </VBox>
+                    <Text text="{path: 'dashboard>Erdat', formatter: '.formatter.formatDate'}" />
+                    <ObjectStatus
+                      text="{path: 'dashboard>Status', formatter: '.formatter.statusText'}"
+                      state="{path: 'dashboard>Status', formatter: '.formatter.statusState'}"
+                      icon="{path: 'dashboard>Status', formatter: '.formatter.statusIcon'}" />
+                    <ObjectNumber number="{dashboard>ItemCount}" unit="Items" />
+                    <Text
+                      text="{
+                        parts: [{path: 'dashboard>TotalAmount'}, {path: 'dashboard>Currency'}],
+                        formatter: '.formatter.currency'
+                      }"
+                      class="sapUiBold" />
+                    <Button
+                      icon="sap-icon://display"
+                      tooltip="View Details"
+                      type="Transparent"
+                      press=".onViewOrderPress" />
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </content>
+        </Panel>
+
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

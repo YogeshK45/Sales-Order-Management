@@ -1,0 +1,68 @@
+[
+  {
+    "Kunnr": "10000001",
+    "Name1": "Acme Industrial Technologies Ltd",
+    "City": "Frankfurt am Main",
+    "Country": "DE",
+    "PostalCode": "60311",
+    "Telephone": "+49 69 1234567",
+    "Email": "procurement@acme-tech.de",
+    "CreditLimit": 150000.00,
+    "PaymentTerms": "NT30"
+  },
+  {
+    "Kunnr": "10000002",
+    "Name1": "Starlight Global Logistics Inc",
+    "City": "Rotterdam",
+    "Country": "NL",
+    "PostalCode": "3011 AD",
+    "Telephone": "+31 10 9876543",
+    "Email": "orders@starlight-logistics.eu",
+    "CreditLimit": 200000.00,
+    "PaymentTerms": "NT60"
+  },
+  {
+    "Kunnr": "10000003",
+    "Name1": "Apex Advanced Manufacturing Corp",
+    "City": "Munich",
+    "Country": "DE",
+    "PostalCode": "80331",
+    "Telephone": "+49 89 5551234",
+    "Email": "supplychain@apex-mfg.com",
+    "CreditLimit": 350000.00,
+    "PaymentTerms": "NT30"
+  },
+  {
+    "Kunnr": "10000004",
+    "Name1": "Zenith Pharma & Biotech Solutions",
+    "City": "Basel",
+    "Country": "CH",
+    "PostalCode": "4001",
+    "Telephone": "+41 61 7778899",
+    "Email": "orders@zenithpharma.ch",
+    "CreditLimit": 500000.00,
+    "PaymentTerms": "NT15"
+  },
+  {
+    "Kunnr": "10000005",
+    "Name1": "Nordic Clean Energy Systems AB",
+    "City": "Stockholm",
+    "Country": "SE",
+    "PostalCode": "111 20",
+    "Telephone": "+46 8 4443322",
+    "Email": "purchasing@nordic-clean.se",
+    "CreditLimit": 180000.00,
+    "PaymentTerms": "NT30"
+  },
+  {
+    "Kunnr": "10000006",
+    "Name1": "Vortex Heavy Engineering LLC",
+    "City": "Chicago",
+    "Country": "US",
+    "PostalCode": "60601",
+    "Telephone": "+1 312 555 0199",
+    "Email": "sales@vortex-eng.com",
+    "CreditLimit": 400000.00,
+    "PaymentTerms": "NT45"
+  }
+]

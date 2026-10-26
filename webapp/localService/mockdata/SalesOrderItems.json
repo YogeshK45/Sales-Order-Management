@@ -1,0 +1,189 @@
+[
+  {
+    "Vbeln": "0000001001",
+    "Posnr": "000010",
+    "Matnr": "MAT-00101",
+    "Maktx": "Industrial Servo Motor 5.5kW High-Torque",
+    "Qty": 4.0,
+    "Meins": "EA",
+    "UnitPrice": 1450.00,
+    "NetAmount": 5800.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001001",
+    "Posnr": "000020",
+    "Matnr": "MAT-00102",
+    "Maktx": "Precision Planetary Gearbox Ratio 10:1",
+    "Qty": 3.0,
+    "Meins": "EA",
+    "UnitPrice": 680.00,
+    "NetAmount": 2040.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001001",
+    "Posnr": "000030",
+    "Matnr": "MAT-00104",
+    "Maktx": "Optical Fiber Sensor 24V DC Diffuse Reflective",
+    "Qty": 5.0,
+    "Meins": "PC",
+    "UnitPrice": 122.00,
+    "NetAmount": 610.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001002",
+    "Posnr": "000010",
+    "Matnr": "MAT-00103",
+    "Maktx": "Programmable Logic Controller (PLC) CPU Module",
+    "Qty": 4.0,
+    "Meins": "EA",
+    "UnitPrice": 2100.00,
+    "NetAmount": 8400.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001002",
+    "Posnr": "000020",
+    "Matnr": "MAT-00106",
+    "Maktx": "Touchscreen HMI Panel 10.4-inch IP65",
+    "Qty": 2.0,
+    "Meins": "EA",
+    "UnitPrice": 1850.00,
+    "NetAmount": 3700.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001002",
+    "Posnr": "000030",
+    "Matnr": "MAT-00107",
+    "Maktx": "High-Pressure Pneumatic Solenoid Valve",
+    "Qty": 2.0,
+    "Meins": "PC",
+    "UnitPrice": 240.00,
+    "NetAmount": 480.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001002",
+    "Posnr": "000040",
+    "Matnr": "MAT-00108",
+    "Maktx": "Reinforced Polyurethane Timing Belt 25mm",
+    "Qty": 5.0,
+    "Meins": "M",
+    "UnitPrice": 54.00,
+    "NetAmount": 270.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001003",
+    "Posnr": "000010",
+    "Matnr": "MAT-00103",
+    "Maktx": "Programmable Logic Controller (PLC) CPU Module",
+    "Qty": 10.0,
+    "Meins": "EA",
+    "UnitPrice": 2100.00,
+    "NetAmount": 21000.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001003",
+    "Posnr": "000020",
+    "Matnr": "MAT-00101",
+    "Maktx": "Industrial Servo Motor 5.5kW High-Torque",
+    "Qty": 4.0,
+    "Meins": "EA",
+    "UnitPrice": 1350.00,
+    "NetAmount": 5400.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001004",
+    "Posnr": "000010",
+    "Matnr": "MAT-00106",
+    "Maktx": "Touchscreen HMI Panel 10.4-inch IP65",
+    "Qty": 4.0,
+    "Meins": "EA",
+    "UnitPrice": 1850.00,
+    "NetAmount": 7400.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001004",
+    "Posnr": "000020",
+    "Matnr": "MAT-00104",
+    "Maktx": "Optical Fiber Sensor 24V DC Diffuse Reflective",
+    "Qty": 15.0,
+    "Meins": "PC",
+    "UnitPrice": 125.50,
+    "NetAmount": 1882.50,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001004",
+    "Posnr": "000030",
+    "Matnr": "MAT-00108",
+    "Maktx": "Reinforced Polyurethane Timing Belt 25mm",
+    "Qty": 10.0,
+    "Meins": "M",
+    "UnitPrice": 49.75,
+    "NetAmount": 497.50,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001005",
+    "Posnr": "000010",
+    "Matnr": "MAT-00101",
+    "Maktx": "Industrial Servo Motor 5.5kW High-Torque",
+    "Qty": 2.0,
+    "Meins": "EA",
+    "UnitPrice": 1450.00,
+    "NetAmount": 2900.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001005",
+    "Posnr": "000020",
+    "Matnr": "MAT-00102",
+    "Maktx": "Precision Planetary Gearbox Ratio 10:1",
+    "Qty": 2.0,
+    "Meins": "EA",
+    "UnitPrice": 650.00,
+    "NetAmount": 1300.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001006",
+    "Posnr": "000010",
+    "Matnr": "MAT-00105",
+    "Maktx": "Heavy-Duty Hydraulic Cylinder 200mm Stroke",
+    "Qty": 16.0,
+    "Meins": "EA",
+    "UnitPrice": 950.00,
+    "NetAmount": 15200.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001006",
+    "Posnr": "000020",
+    "Matnr": "MAT-00107",
+    "Maktx": "High-Pressure Pneumatic Solenoid Valve",
+    "Qty": 10.0,
+    "Meins": "PC",
+    "UnitPrice": 240.00,
+    "NetAmount": 2400.00,
+    "Waers": "EUR"
+  },
+  {
+    "Vbeln": "0000001006",
+    "Posnr": "000030",
+    "Matnr": "MAT-00102",
+    "Maktx": "Precision Planetary Gearbox Ratio 10:1",
+    "Qty": 2.0,
+    "Meins": "EA",
+    "UnitPrice": 800.00,
+    "NetAmount": 1600.00,
+    "Waers": "EUR"
+  }
+]
